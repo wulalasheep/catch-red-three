@@ -5,6 +5,38 @@
   <p>一款支持单人/多人的H5在线纸牌游戏</p>
 </div>
 
+## 🌐 在线访问
+
+- **游戏地址**: https://catch-red-three.vercel.app
+- **后端服务**: https://catch-red-three-production.up.railway.app
+- **代码仓库**: https://github.com/wulalasheep/catch-red-three
+
+## 🚀 更新部署
+
+修改代码后，执行以下命令即可自动部署到线上：
+
+```bash
+cd /Users/zhangxj/Downloads/抓红三/抓红三
+git add -A
+git commit -m "更新说明"
+git push
+```
+
+推送后，Vercel（前端）和 Railway（后端）会自动检测并重新部署（约1-2分钟）。
+
+### 查看部署状态
+- Vercel 控制台: https://vercel.com/dashboard
+- Railway 控制台: https://railway.app/dashboard
+
+### 环境变量配置
+
+| 平台 | 变量名 | 值 |
+|------|--------|-----|
+| Vercel (前端) | `VITE_SOCKET_URL` | https://catch-red-three-production.up.railway.app |
+| Railway (后端) | `NODE_ENV` | production |
+| Railway (后端) | `PORT` | 3002 |
+| Railway (后端) | `FRONTEND_URL` | https://catch-red-three.vercel.app |
+
 ## 📖 游戏简介
 
 捉红3是一款五人纸牌游戏，使用一副54张扑克牌（含大小王），每人发10张牌，剩余4张弃掉。游戏核心是**红三方（持有红桃3或方片3的玩家）** vs **黑三方（其他玩家）**的对抗。
