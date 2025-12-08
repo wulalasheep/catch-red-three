@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>捉红3 - UI预览</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+      color: #e0e1dd;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .demo-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .demo-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .logo-card {
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .logo-card.red { color: #e74c3c; animation-delay: 0s; }
+    .logo-card.black { color: #2c3e50; animation-delay: 0.5s; }
+    .logo-card:nth-child(4) { animation-delay: 0.25s; }
+    .logo-card:nth-child(5) { animation-delay: 0.75s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .logo-text {
+      background: linear-gradient(135deg, #c0392b 0%, #f1c40f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      color: #a0a4a8;
+      margin-bottom: 30px;
+    }
+
+    .demo-section {
+      margin-bottom: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      color: #f1c40f;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .feature-item {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .feature-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .feature-desc {
+      font-size: 0.8rem;
+      color: #a0a4a8;
+      line-height: 1.4;
+    }
+
+    .demo-cards {
+      display: flex;
+      justify-content: center;
+      gap: -15px;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .demo-card {
+      background: #fefefe;
+      border-radius: 8px;
+      width: 50px;
+      height: 75px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border: 1px solid #d0d0d0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+
+    .demo-card.selected {
+      border-color: #f1c40f;
+      box-shadow: 0 0 0 3px rgba(241, 196, 15, 0.3), 0 8px 20px rgba(241, 196, 15, 0.4);
+      z-index: 2;
+    }
+
+    .card-corner-top {
+      align-self: flex-start;
+      color: #e74c3c;
+    }
+
+    .card-center {
+      color: #e74c3c;
+      font-size: 1.2rem;
+    }
+
+    .demo-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .demo-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .demo-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .demo-btn:active::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(192, 57, 43, 0.4);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+      color: white;
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+      color: white;
+    }
+
+    .demo-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .demo-btn:active {
+      transform: scale(0.96);
+    }
+
+    .particles-demo {
+      position: relative;
+      height: 150px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: particleFloat 3s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) {
+      width: 8px;
+      height: 8px;
+      background: #f1c40f;
+      left: 20%;
+      top: 30%;
+      animation-delay: 0s;
+    }
+
+    .particle:nth-child(2) {
+      width: 6px;
+      height: 6px;
+      background: #e74c3c;
+      left: 60%;
+      top: 50%;
+      animation-delay: 1s;
+    }
+
+    .particle:nth-child(3) {
+      width: 10px;
+      height: 10px;
+      background: #3498db;
+      left: 80%;
+      top: 20%;
+      animation-delay: 2s;
+    }
+
+    @keyframes particleFloat {
+      0%, 100% {
+        transform: translateY(0px) scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translateY(-20px) scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    .demo-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+    }
+
+    .demo-footer p {
+      color: #a0a4a8;
+      margin-bottom: 10px;
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #e74c3c;
+      border-radius: 50%;
+      margin-right: 8px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    @media (max-width: 480px) {
+      .demo-container {
+        padding: 15px;
+      }
+
+      .logo-text {
+        font-size: 2rem;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .demo-btn {
+        width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <div class="demo-header">
+      <div class="logo">
+        <span class="logo-card red">♥</span>
+        <span class="logo-card black">♠</span>
+        <span class="logo-text">捉红3</span>
+        <span class="logo-card red">♦</span>
+        <span class="logo-card black">♣</span>
+      </div>
+      <p class="subtitle">UI/UX 改进预览</p>
+    </div>
+
+    <div class="demo-section">
+      <h3 class="section-title">✨ 动画效果</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <span class="feature-icon">🎯</span>
+          <div class="feature-title">抛物线出牌</div>
+          <div class="feature-desc">牌从手牌飞向中央的物理轨迹动画</div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🔄</span>
+          <div class="feature-title">阶段过渡</div>
+          <div class="feature-desc">平滑的游戏阶段切换动画</div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">💫</span>
+          <div class="feature-title">粒子特效</div>
+          <div class="feature-desc">出牌和胜利时的视觉反馈</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h3 class="section-title">👆 交互体验</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <span class="feature-icon">🖱️</span>
+          <div class="feature-title">拖拽选牌</div>
+          <div class="feature-desc">支持多张牌的拖拽选择</div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">📳</span>
+          <div class="feature-title">触觉反馈</div>
+          <div class="feature-desc">振动和音效增强体验</div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🎛️</span>
+          <div class="feature-title">智能按钮</div>
+          <div class="feature-desc">涟漪效果和多状态反馈</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h3 class="section-title">🎨 视觉增强</h3>
+      <div class="demo-cards">
+        <div class="demo-card">
+          <div class="card-corner-top">
+            <div>A</div>
+            <div>♥</div>
+          </div>
+          <div class="card-center">♥</div>
+        </div>
+        <div class="demo-card selected">
+          <div class="card-corner-top">
+            <div>K</div>
+            <div>♦</div>
+          </div>
+          <div class="card-center">♦</div>
+        </div>
+        <div class="demo-card">
+          <div class="card-corner-top">
+            <div>2</div>
+            <div>♠</div>
+          </div>
+          <div class="card-center">♠</div>
+        </div>
+      </div>
+      <p style="text-align: center; color: #a0a4a8; font-size: 0.9rem; margin-top: 15px;">
+        选中状态的牌有发光效果和脉动动画
+      </p>
+    </div>
+
+    <div class="demo-section">
+      <h3 class="section-title">🎆 粒子系统</h3>
+      <div class="particles-demo">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <span style="color: #f1c40f; font-size: 1.2rem;">胜利特效演示</span>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h3 class="section-title">🎮 按钮交互</h3>
+      <div class="demo-buttons">
+        <button class="demo-btn btn-primary">出牌</button>
+        <button class="demo-btn btn-secondary">不要</button>
+        <button class="demo-btn btn-success">确认</button>
+      </div>
+      <p style="text-align: center; color: #a0a4a8; font-size: 0.9rem; margin-top: 15px;">
+        点击按钮体验涟漪效果和触觉反馈
+      </p>
+    </div>
+
+    <div class="demo-footer">
+      <p><span class="status-indicator"></span>完整版游戏需要Node.js环境运行</p>
+      <p>此预览展示了UI/UX改进的核心功能</p>
+      <p style="margin-top: 10px; font-size: 0.8rem; color: #7f8c8d;">
+        如需体验完整交互，请在本地环境运行: npm run dev
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // 添加按钮点击效果
+    document.querySelectorAll('.demo-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // 模拟触觉反馈
+        if (navigator.vibrate) {
+          navigator.vibrate(20);
+        }
+
+        // 按钮点击音效（如果支持）
+        try {
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+
+          oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+          oscillator.type = 'sine';
+
+          gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + 0.05);
+        } catch (e) {
+          // 忽略音频错误
+        }
+      });
+    });
+
+    // 卡牌点击效果
+    document.querySelectorAll('.demo-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.demo-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+
+        if (navigator.vibrate) {
+          navigator.vibrate(10);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+
