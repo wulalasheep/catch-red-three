@@ -4,8 +4,8 @@ const { Server } = require('socket.io')
 const cors = require('cors')
 const { v4: uuidv4 } = require('uuid')
 
-// 从共享模块导入游戏核心逻辑
-const GameCore = require('../shared/game-core.js')
+// 从本地模块导入游戏核心逻辑
+const GameCore = require('./game-core.js')
 const {
   // 常量
   SUITS,
