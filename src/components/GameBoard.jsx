@@ -540,20 +540,18 @@ const GameBoard = () => {
       {phase === GAME_PHASES.PLAYING && renderGameTable()}
       {(phase === GAME_PHASES.ROUND_END || phase === GAME_PHASES.GAME_OVER) && winner && renderWinScreen()}
       
-      {/* 牌局记录面板 */}
+      {/* 右上角按钮组 */}
       {phase !== GAME_PHASES.WAITING && (
-        <GameLog
-          gameLog={gameLog}
-          isOpen={showLog}
-          onToggle={() => setShowLog(!showLog)}
-        />
-      )}
-
-      {/* 玩法介绍按钮 */}
-      {phase !== GAME_PHASES.WAITING && (
-        <button className="rules-toggle" onClick={() => setShowRules(true)}>
-          玩法介绍
-        </button>
+        <div className="top-right-buttons">
+          <GameLog
+            gameLog={gameLog}
+            isOpen={showLog}
+            onToggle={() => setShowLog(!showLog)}
+          />
+          <button className="rules-toggle-inline" onClick={() => setShowRules(true)}>
+            玩法介绍
+          </button>
+        </div>
       )}
 
       {/* 游戏规则面板 */}

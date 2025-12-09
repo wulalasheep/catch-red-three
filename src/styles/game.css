@@ -2105,13 +2105,14 @@ body {
     font-size: var(--font-xs) !important;
   }
   
-  /* 牌局记录按钮横屏位置 */
-  .game-log-panel {
-    right: calc(8px + var(--safe-right));
-    top: 4px;
+  /* 右上角按钮组横屏位置 */
+  .top-right-buttons {
+    right: calc(10px + var(--safe-right));
+    top: 6px;
   }
-  
-  .game-log-toggle {
+
+  .game-log-toggle,
+  .rules-toggle-inline {
     padding: 4px 8px;
     font-size: var(--font-xs);
   }
@@ -2995,14 +2996,43 @@ body {
 }
 
 /* ================================
+   右上角按钮组
+   ================================ */
+
+.top-right-buttons {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.rules-toggle-inline {
+  background: rgba(27, 38, 59, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: var(--text-primary);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.rules-toggle-inline:hover {
+  background: rgba(27, 38, 59, 1);
+  border-color: var(--accent);
+}
+
+/* ================================
    牌局记录面板
    ================================ */
 
 .game-log-panel {
-  position: fixed;
-  right: 8px;
-  top: 8px;
-  z-index: 1000;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -3151,13 +3181,16 @@ body {
 
 /* 移动端适配 */
 @media screen and (max-width: 768px) {
-  .game-log-panel {
+  .top-right-buttons {
     right: 5px;
+    top: 5px;
+    gap: 6px;
   }
 
-  .game-log-toggle {
-    padding: 6px 10px;
-    font-size: 11px;
+  .game-log-toggle,
+  .rules-toggle-inline {
+    padding: 5px 8px;
+    font-size: 10px;
   }
 
   .game-log-content {
@@ -3179,25 +3212,7 @@ body {
    游戏规则面板
    ================================ */
 
-.rules-toggle {
-  position: fixed;
-  right: 10px;
-  top: 90px;
-  z-index: 100;
-  background: rgba(27, 38, 59, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 6px 12px;
-  color: var(--text-primary);
-  font-size: var(--font-xs);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.rules-toggle:hover {
-  background: rgba(27, 38, 59, 1);
-  border-color: var(--accent);
-}
+/* 旧的 .rules-toggle 已移除，改用 .rules-toggle-inline */
 
 .rules-overlay {
   position: fixed;
@@ -3440,11 +3455,6 @@ body {
 
 /* 横屏模式 */
 @media (orientation: landscape) {
-  .rules-toggle {
-    top: 50px;
-    right: calc(8px + var(--safe-right));
-  }
-
   .rules-panel {
     width: 50%;
     max-width: 400px;
