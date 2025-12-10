@@ -4,7 +4,10 @@
       "Bash(npm run build:*)",
       "Bash(npm install:*)",
       "Bash(lsof:*)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfix: 修复首页游戏简介遮挡按钮的问题\n\n- 取消游戏简介的绝对定位\n- 改为静态定位放在按钮下方\n- 调整字体大小适配横屏\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push)"
     ],
     "deny": [],
     "ask": []

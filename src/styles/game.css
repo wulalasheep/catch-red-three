@@ -1867,11 +1867,20 @@ body {
   }
 
   .game-rules-brief {
-    margin-top: 0;
-    position: absolute;
-    right: calc(20px + var(--safe-right));
-    top: 50%;
-    transform: translateY(-50%);
+    margin-top: 20px;
+    position: static;
+    transform: none;
+    max-width: 280px;
+    font-size: 0.75rem;
+  }
+
+  .game-rules-brief h3 {
+    font-size: 0.9rem;
+  }
+
+  .game-rules-brief li {
+    font-size: 0.7rem;
+    padding: 3px 0;
   }
 
   /* 游戏桌面横屏布局 */
