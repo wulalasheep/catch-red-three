@@ -219,15 +219,6 @@ const GameBoard = () => {
       >
         开始游戏
       </EnhancedButton>
-      <div className="game-rules-brief">
-        <h3>游戏简介</h3>
-        <ul>
-          <li>5人参与，每人10张牌</li>
-          <li>红桃3、方片3持有者为红三方</li>
-          <li>持红桃5者首家出牌</li>
-          <li>先出完牌的一方获胜</li>
-        </ul>
-      </div>
     </motion.div>
   )
   
