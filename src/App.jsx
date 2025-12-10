@@ -50,7 +50,6 @@ function App() {
           <span className="red">♦</span>
           <span className="black">♣</span>
         </h1>
-        <p className="game-subtitle">五人在线纸牌游戏</p>
       </div>
       
       <div className="mode-select">

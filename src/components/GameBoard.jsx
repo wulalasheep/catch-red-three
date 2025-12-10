@@ -208,7 +208,6 @@ const GameBoard = () => {
         <span className="logo-card red">♦</span>
         <span className="logo-card black">♣</span>
       </div>
-      <p className="game-subtitle">五人在线纸牌游戏</p>
       <EnhancedButton
         variant="start"
         onClick={() => {
